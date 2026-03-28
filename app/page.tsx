@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import React, { useMemo, useState } from "react";
 
 type Product = {
   name: string;
@@ -22,16 +23,6 @@ const categories = [
   "Velas personalizadas",
   "Velas para eventos",
   "Ramos y diseños especiales",
-];
-
-const productTypeOptions = [
-  "Velas aromáticas",
-  "Velas florales",
-  "Velas personalizadas",
-  "Velas para eventos",
-  "Wax melts",
-  "Ramos y diseños especiales",
-  "Vela temática animalito",
 ];
 
 const products: Product[] = [
@@ -148,23 +139,19 @@ const faqs = [
   },
   {
     q: "¿Puedo enviar una imagen de referencia?",
-    a: "Sí. Ya puedes seleccionar un archivo como referencia visual dentro del formulario de cotización.",
+    a: "Sí. Puedes compartir una imagen para guiarnos y darte una cotización más cercana.",
   },
   {
     q: "¿Con cuánto tiempo debo pedir para eventos?",
     a: "Depende de la cantidad. Para eventos, lo ideal es escribir con anticipación para revisar tiempos, materiales y viabilidad.",
   },
-  {
-    q: "¿Qué significa pequeño, mediano y grande?",
-    a: "Como guía general: pequeño puede rondar 6 a 8 cm, mediano 9 a 12 cm y grande 13 a 16 cm. Estas medidas son aproximadas y pueden variar según el molde o diseño.",
-  },
-  {
-    q: "¿Qué significa simple, detallado y premium?",
-    a: "Simple es una propuesta base con menor complejidad visual. Detallado incluye más acabado o elementos decorativos. Premium contempla un nivel más alto de personalización, presentación o trabajo artesanal.",
-  },
 ];
 
 const whatsappNumber = "573021277385";
+const instagramHandle = "velasgaia.26";
+const instagramUrl = "https://instagram.com/velasgaia.26";
+const tiktokHandle = "@velas.gaia";
+const tiktokUrl = "https://www.tiktok.com/@velas.gaia";
 
 function formatCOP(value: number) {
   return new Intl.NumberFormat("es-CO", {
@@ -177,14 +164,8 @@ function formatCOP(value: number) {
 function LogoMark() {
   return (
     <div className="flex items-center gap-4">
-      <div className="relative h-14 w-14 overflow-hidden rounded-full border border-[#d8d2c8] bg-[#f8f5ef]">
-        <div className="absolute left-1/2 top-1/2 h-10 w-[1px] -translate-x-1/2 -translate-y-1/2 bg-[#809084]" />
-        <div className="absolute left-1/2 top-[17px] h-[1px] w-8 -translate-x-1/2 bg-[#809084] opacity-60" />
-        <div className="absolute left-[15px] top-[15px] h-5 w-5 rounded-full border border-[#d9d4ca]" />
-        <div className="absolute right-[15px] top-[15px] h-5 w-5 rounded-full border border-[#d9d4ca]" />
-        <div className="absolute left-[10px] top-[22px] h-5 w-5 rounded-full border border-[#e2ddd4]" />
-        <div className="absolute right-[10px] top-[22px] h-5 w-5 rounded-full border border-[#e2ddd4]" />
-        <div className="absolute left-1/2 bottom-[8px] h-5 w-5 -translate-x-1/2 rounded-full border border-[#e8e2d8]" />
+      <div className="relative h-14 w-24 overflow-hidden rounded-full bg-transparent">
+        <Image src="/logo-gaia.png" alt="Logo GAIA" fill className="object-contain" priority />
       </div>
       <div>
         <div className="font-serif text-[32px] tracking-[0.24em] text-[#5b6e66]">GAIA</div>
@@ -208,9 +189,7 @@ function ProductVisual({ index }: { index: number }) {
       <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#ece4d8]" />
       <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f1eadf]" />
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-        <div
-          className={`${shapes[index % shapes.length]} border border-[#d7cebf] bg-[linear-gradient(180deg,#ebe6dc_0%,#ebe6dc_68%,#d0ad91_68%,#d0ad91_100%)] shadow-sm`}
-        />
+        <div className={`${shapes[index % shapes.length]} border border-[#d7cebf] bg-[linear-gradient(180deg,#ebe6dc_0%,#ebe6dc_68%,#d0ad91_68%,#d0ad91_100%)] shadow-sm`} />
       </div>
       <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-[10px] uppercase tracking-[0.26em] text-[#7c8178]">
         Pieza GAIA
@@ -219,76 +198,42 @@ function ProductVisual({ index }: { index: number }) {
   );
 }
 
-function SectionTitle({
-  eyebrow,
-  title,
-  body,
-  light = false,
-}: {
-  eyebrow: string;
-  title: string;
-  body?: string;
-  light?: boolean;
-}) {
+function SectionTitle({ eyebrow, title, body, light = false }: { eyebrow: string; title: string; body?: string; light?: boolean }) {
   return (
     <div className="max-w-3xl">
-      <p className={`text-[11px] uppercase tracking-[0.34em] ${light ? "text-white/70" : "text-[#8b877d]"}`}>
-        {eyebrow}
-      </p>
-      <h2 className={`mt-3 font-serif text-4xl leading-tight md:text-5xl ${light ? "text-white" : "text-[#4a5e56]"}`}>
-        {title}
-      </h2>
-      {body ? (
-        <p className={`mt-5 max-w-2xl text-sm leading-8 md:text-base ${light ? "text-white/80" : "text-[#6b6b64]"}`}>
-          {body}
-        </p>
-      ) : null}
+      <p className={`text-[11px] uppercase tracking-[0.34em] ${light ? "text-white/70" : "text-[#8b877d]"}`}>{eyebrow}</p>
+      <h2 className={`mt-3 font-serif text-4xl leading-tight md:text-5xl ${light ? "text-white" : "text-[#4a5e56]"}`}>{title}</h2>
+      {body ? <p className={`mt-5 max-w-2xl text-sm leading-8 md:text-base ${light ? "text-white/80" : "text-[#6b6b64]"}`}>{body}</p> : null}
     </div>
   );
 }
 
 export default function GaiaWebV1() {
-  const quoteSectionRef = useRef<HTMLElement | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [search, setSearch] = useState("");
   const [quoteName, setQuoteName] = useState("");
   const [quoteCity, setQuoteCity] = useState("Rionegro, Antioquia");
-  const [quoteType, setQuoteType] = useState("Velas personalizadas");
+  const [quoteType, setQuoteType] = useState("Personalizada");
   const [quoteSize, setQuoteSize] = useState("Mediano");
   const [quoteQuantity, setQuoteQuantity] = useState(1);
   const [quoteStyle, setQuoteStyle] = useState("Simple");
   const [quoteAroma, setQuoteAroma] = useState("");
   const [quoteDetails, setQuoteDetails] = useState("");
-  const [quoteReferenceStyle, setQuoteReferenceStyle] = useState("");
-  const [uploadedFileName, setUploadedFileName] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedProductQty, setSelectedProductQty] = useState(1);
 
   const filteredProducts = useMemo(() => {
-    const base =
-      selectedCategory === "Todos"
-        ? products
-        : products.filter((item) => item.category === selectedCategory);
-
+    const base = selectedCategory === "Todos" ? products : products.filter((item) => item.category === selectedCategory);
     if (!search.trim()) return base;
-
-    return base.filter((item) =>
-      `${item.name} ${item.type} ${item.category}`.toLowerCase().includes(search.toLowerCase())
-    );
+    return base.filter((item) => `${item.name} ${item.type} ${item.category}`.toLowerCase().includes(search.toLowerCase()));
   }, [search, selectedCategory]);
 
   const estimatedPrice = useMemo(() => {
     const typeMap: Record<string, number> = {
-      "Velas aromáticas": 26000,
-      "Velas florales": 34000,
-      "Velas personalizadas": 32000,
-      "Velas para eventos": 12000,
-      "Wax melts": 16000,
-      "Ramos y diseños especiales": 68000,
-      "Vela temática animalito": 30000,
+      Aromática: 26000,
+      Floral: 34000,
+      Personalizada: 32000,
+      Evento: 12000,
     };
 
     const sizeMap: Record<string, number> = {
@@ -305,48 +250,15 @@ export default function GaiaWebV1() {
 
     const base = typeMap[quoteType] || 30000;
     const price = Math.round(base * sizeMap[quoteSize] * styleMap[quoteStyle] * Math.max(1, quoteQuantity));
-
     return {
       min: Math.round(price * 0.92),
       max: Math.round(price * 1.08),
     };
   }, [quoteQuantity, quoteSize, quoteStyle, quoteType]);
 
-  const selectedProductTotal = useMemo(() => {
-    if (!selectedProduct) return 0;
-    return selectedProduct.price * Math.max(1, selectedProductQty);
-  }, [selectedProduct, selectedProductQty]);
-
   const whatsappMessage = encodeURIComponent(
-    `Hola, quiero cotizar una vela en GAIA. Nombre: ${quoteName || "No indicado"}. Ciudad: ${
-      quoteCity || "No indicada"
-    }. Tipo: ${quoteType}. Estilo base: ${quoteReferenceStyle || "No definido"}. Tamaño: ${quoteSize}. Cantidad: ${
-      quoteQuantity
-    }. Nivel: ${quoteStyle}. Aroma: ${quoteAroma || "Por definir"}. Referencia: ${
-      uploadedFileName || "Sin archivo"
-    }. Detalles: ${quoteDetails || "Por definir"}.`
+    `Hola, quiero cotizar una vela en GAIA. Nombre: ${quoteName || "No indicado"}. Ciudad: ${quoteCity || "No indicada"}. Tipo: ${quoteType}. Tamaño: ${quoteSize}. Cantidad: ${quoteQuantity}. Nivel: ${quoteStyle}. Aroma: ${quoteAroma || "Por definir"}. Detalles: ${quoteDetails || "Por definir"}.`
   );
-
-  function openProduct(product: Product) {
-    setSelectedProduct(product);
-    setSelectedProductQty(1);
-  }
-
-  function handlePersonalizeProduct(product: Product) {
-    setQuoteType(product.category);
-    setQuoteReferenceStyle(product.name);
-    setQuoteQuantity(1);
-    setSelectedProduct(null);
-
-    setTimeout(() => {
-      quoteSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
-  }
-
-  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    setUploadedFileName(file ? file.name : "");
-  }
 
   return (
     <div className="min-h-screen bg-[#f7f4ee] text-[#44564f]">
@@ -356,27 +268,13 @@ export default function GaiaWebV1() {
             <LogoMark />
 
             <nav className="hidden items-center gap-8 text-sm text-[#5f655f] xl:flex">
-              <a href="#inicio" className="transition hover:text-[#44564f]">
-                Inicio
-              </a>
-              <a href="#catalogo" className="transition hover:text-[#44564f]">
-                Catálogo
-              </a>
-              <a href="#personaliza" className="transition hover:text-[#44564f]">
-                Personaliza
-              </a>
-              <a href="#eventos" className="transition hover:text-[#44564f]">
-                Eventos
-              </a>
-              <a href="#sobre" className="transition hover:text-[#44564f]">
-                Sobre GAIA
-              </a>
-              <a href="#faq" className="transition hover:text-[#44564f]">
-                FAQ
-              </a>
-              <a href="#contacto" className="transition hover:text-[#44564f]">
-                Contacto
-              </a>
+              <a href="#inicio" className="transition hover:text-[#44564f]">Inicio</a>
+              <a href="#catalogo" className="transition hover:text-[#44564f]">Catálogo</a>
+              <a href="#personaliza" className="transition hover:text-[#44564f]">Personaliza</a>
+              <a href="#eventos" className="transition hover:text-[#44564f]">Eventos</a>
+              <a href="#sobre" className="transition hover:text-[#44564f]">Sobre GAIA</a>
+              <a href="#faq" className="transition hover:text-[#44564f]">FAQ</a>
+              <a href="#contacto" className="transition hover:text-[#44564f]">Contacto</a>
             </nav>
 
             <a
@@ -389,10 +287,7 @@ export default function GaiaWebV1() {
         </header>
 
         <main>
-          <section
-            id="inicio"
-            className="mx-auto grid max-w-7xl gap-6 px-4 py-6 md:px-6 lg:px-10 lg:py-10 xl:grid-cols-[310px_1fr]"
-          >
+          <section id="inicio" className="mx-auto grid max-w-7xl gap-6 px-4 py-6 md:px-6 lg:px-10 lg:py-10 xl:grid-cols-[310px_1fr]">
             <aside className="rounded-[2rem] border border-[#e7dfd3] bg-[#f4f0e9] p-7">
               <div className="mb-10 flex justify-between">
                 <div className="grid gap-1">
@@ -404,21 +299,14 @@ export default function GaiaWebV1() {
               </div>
 
               <div className="space-y-2 text-[12px] uppercase tracking-[0.22em] text-[#5f655f]">
-                <a href="#inicio" className="block">
-                  Index
-                </a>
-                <a href="#catalogo" className="block">
-                  Shop
-                </a>
-                <a href="#contacto" className="block">
-                  Contact
-                </a>
+                <a href="#inicio" className="block">Index</a>
+                <a href="#catalogo" className="block">Shop</a>
+                <a href="#contacto" className="block">Contact</a>
               </div>
 
               <div className="mt-12 space-y-3 text-[11px] text-[#8a867d]">
-                <div>@velasgaia.26</div>
-                <div>@velas.gaia</div>
-                <div>Rionegro, Antioquia</div>
+                <a href={instagramUrl} target="_blank" rel="noreferrer" className="block hover:text-[#52665d]">@{instagramHandle}</a>
+                <a href={tiktokUrl} target="_blank" rel="noreferrer" className="block hover:text-[#52665d]">{tiktokHandle}</a>
               </div>
 
               <div className="mt-16 min-h-[240px] rounded-[1.75rem] border border-[#ece5da] bg-[#faf8f4] p-5">
@@ -445,8 +333,7 @@ export default function GaiaWebV1() {
                       Velas que abrazan, decoran y cuentan historias
                     </h1>
                     <p className="mt-6 max-w-lg text-sm leading-8 text-[#696862] md:text-base">
-                      GAIA crea piezas artesanales pensadas para transformar espacios, envolver emociones y
-                      convertir momentos simples en recuerdos especiales.
+                      GAIA crea piezas artesanales pensadas para transformar espacios, envolver emociones y convertir momentos simples en recuerdos especiales.
                     </p>
                   </div>
 
@@ -454,10 +341,7 @@ export default function GaiaWebV1() {
                     <a href="#catalogo" className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">
                       Ver catálogo
                     </a>
-                    <a
-                      href="#personaliza"
-                      className="rounded-full border border-[#d4cabc] px-6 py-3 text-sm font-medium text-[#52665d]"
-                    >
+                    <a href="#personaliza" className="rounded-full border border-[#d4cabc] px-6 py-3 text-sm font-medium text-[#52665d]">
                       Personaliza tu vela
                     </a>
                   </div>
@@ -465,17 +349,14 @@ export default function GaiaWebV1() {
 
                 <div className="grid gap-5 rounded-[1.8rem] bg-[#f6f2ea] p-5 md:grid-cols-[1.2fr_0.8fr] md:p-6">
                   <div className="relative min-h-[420px] overflow-hidden rounded-[1.8rem] bg-[#fcfbf8] p-6">
-                    <div className="absolute right-6 top-5 text-[11px] font-medium uppercase tracking-[0.28em] text-[#6b6f67]">
-                      + info
-                    </div>
-                    <div className="absolute left-8 top-10 max-w-[180px] text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">
+                    <div className="absolute right-6 top-5 text-[11px] font-medium uppercase tracking-[0.28em] text-[#6b6f67]">+ info</div>
+                    <div className="absolute left-8 top-10 z-10 max-w-[180px] text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">
                       Minimalismo natural · regalos · recuerdos especiales
                     </div>
-                    <div className="absolute bottom-10 left-8 h-28 w-28 rounded-[1.5rem] border border-[#d9d1c4] bg-[linear-gradient(180deg,#e9e4da_0%,#e9e4da_70%,#cfae91_70%,#cfae91_100%)] shadow-sm" />
-                    <div className="absolute bottom-14 left-32 h-24 w-24 rounded-[1.25rem] border border-[#dbd2c5] bg-[#e5dfd5] shadow-sm" />
-                    <div className="absolute right-8 top-20 flex h-64 w-40 items-start justify-center">
-                      <div className="mt-4 h-36 w-28 rounded-[1.4rem] border border-[#d6cdbf] bg-[linear-gradient(180deg,#ece7de_0%,#ece7de_68%,#cfac90_68%,#cfac90_100%)] shadow-md" />
+                    <div className="absolute inset-0 opacity-90">
+                      <Image src="/hero-reference.jpg" alt="Referencia visual GAIA" fill className="object-cover" priority />
                     </div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#fcfbf8]/40 to-[#fcfbf8]/60" />
                   </div>
 
                   <div className="flex flex-col justify-between gap-5">
@@ -510,10 +391,7 @@ export default function GaiaWebV1() {
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {categories.slice(1).map((item, index) => (
-                <div
-                  key={item}
-                  className="group rounded-[1.7rem] border border-[#e8e1d6] bg-[#faf8f4] p-6 transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
-                >
+                <div key={item} className="group rounded-[1.7rem] border border-[#e8e1d6] bg-[#faf8f4] p-6 transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-md">
                   <div className="mb-7 flex items-center justify-between">
                     <div className="text-[11px] uppercase tracking-[0.3em] text-[#8f8a80]">0{index + 1}</div>
                     <div className="h-9 w-9 rounded-full border border-[#dfd7ca] bg-[#f3eee6]" />
@@ -566,10 +444,7 @@ export default function GaiaWebV1() {
 
               <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {filteredProducts.map((product, index) => (
-                  <div
-                    key={product.name}
-                    className="overflow-hidden rounded-[2rem] border border-[#e8e0d4] bg-white shadow-[0_10px_40px_rgba(84,82,77,0.05)]"
-                  >
+                  <div key={product.name} className="overflow-hidden rounded-[2rem] border border-[#e8e0d4] bg-white shadow-[0_10px_40px_rgba(84,82,77,0.05)]">
                     <ProductVisual index={index} />
                     <div className="p-6">
                       <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">{product.type}</div>
@@ -582,7 +457,7 @@ export default function GaiaWebV1() {
                         </div>
                         <div className="flex gap-2">
                           <button
-                            onClick={() => openProduct(product)}
+                            onClick={() => setSelectedProduct(product)}
                             className="rounded-full border border-[#d5ccbf] px-4 py-2 text-sm text-[#5f655f]"
                           >
                             Ver
@@ -599,7 +474,7 @@ export default function GaiaWebV1() {
             </div>
           </section>
 
-          <section id="personaliza" ref={quoteSectionRef} className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+          <section id="personaliza" className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
             <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
               <div className="rounded-[2rem] border border-[#e7dfd3] bg-[#eef0ea] p-8 lg:p-10">
                 <SectionTitle
@@ -630,30 +505,11 @@ export default function GaiaWebV1() {
                 <div className="mt-10 rounded-[1.75rem] border border-[#d7d1c4] bg-white p-6">
                   <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Resumen del pedido</div>
                   <div className="mt-4 space-y-3 text-sm text-[#63665f]">
-                    <div className="flex justify-between gap-4">
-                      <span>Tipo</span>
-                      <span className="font-medium text-[#4f625a]">{quoteType}</span>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <span>Estilo base</span>
-                      <span className="font-medium text-[#4f625a]">{quoteReferenceStyle || "Por definir"}</span>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <span>Tamaño</span>
-                      <span className="font-medium text-[#4f625a]">{quoteSize}</span>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <span>Cantidad</span>
-                      <span className="font-medium text-[#4f625a]">{quoteQuantity}</span>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <span>Nivel</span>
-                      <span className="font-medium text-[#4f625a]">{quoteStyle}</span>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <span>Referencia</span>
-                      <span className="font-medium text-[#4f625a]">{uploadedFileName || "Sin archivo"}</span>
-                    </div>
+                    <div className="flex justify-between gap-4"><span>Tipo</span><span className="font-medium text-[#4f625a]">{quoteType}</span></div>
+                    <div className="flex justify-between gap-4"><span>Tamaño</span><span className="font-medium text-[#4f625a]">{quoteSize}</span></div>
+                    <div className="flex justify-between gap-4"><span>Cantidad</span><span className="font-medium text-[#4f625a]">{quoteQuantity}</span></div>
+                    <div className="flex justify-between gap-4"><span>Nivel</span><span className="font-medium text-[#4f625a]">{quoteStyle}</span></div>
+                    <div className="flex justify-between gap-4"><span>Aroma</span><span className="font-medium text-[#4f625a]">{quoteAroma || "Por definir"}</span></div>
                   </div>
                 </div>
               </div>
@@ -672,20 +528,13 @@ export default function GaiaWebV1() {
                     className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
                     placeholder="Ciudad"
                   />
-                  <select
-                    value={quoteType}
-                    onChange={(e) => setQuoteType(e.target.value)}
-                    className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 text-[#6d6b63] outline-none"
-                  >
-                    {productTypeOptions.map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
+                  <select value={quoteType} onChange={(e) => setQuoteType(e.target.value)} className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 text-[#6d6b63] outline-none">
+                    <option>Aromática</option>
+                    <option>Floral</option>
+                    <option>Personalizada</option>
+                    <option>Evento</option>
                   </select>
-                  <select
-                    value={quoteSize}
-                    onChange={(e) => setQuoteSize(e.target.value)}
-                    className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 text-[#6d6b63] outline-none"
-                  >
+                  <select value={quoteSize} onChange={(e) => setQuoteSize(e.target.value)} className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 text-[#6d6b63] outline-none">
                     <option>Pequeño</option>
                     <option>Mediano</option>
                     <option>Grande</option>
@@ -698,11 +547,7 @@ export default function GaiaWebV1() {
                     className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
                     placeholder="Cantidad"
                   />
-                  <select
-                    value={quoteStyle}
-                    onChange={(e) => setQuoteStyle(e.target.value)}
-                    className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 text-[#6d6b63] outline-none"
-                  >
+                  <select value={quoteStyle} onChange={(e) => setQuoteStyle(e.target.value)} className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 text-[#6d6b63] outline-none">
                     <option>Simple</option>
                     <option>Detallado</option>
                     <option>Premium</option>
@@ -713,12 +558,6 @@ export default function GaiaWebV1() {
                     className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c] md:col-span-2"
                     placeholder="Aroma deseado"
                   />
-                  <input
-                    value={quoteReferenceStyle}
-                    onChange={(e) => setQuoteReferenceStyle(e.target.value)}
-                    className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c] md:col-span-2"
-                    placeholder="Estilo de vela a personalizar"
-                  />
                 </div>
 
                 <textarea
@@ -728,15 +567,9 @@ export default function GaiaWebV1() {
                   placeholder="Cuéntanos tu idea, los colores, la ocasión, el diseño o los detalles especiales"
                 />
 
-                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="mt-4 flex w-full items-center justify-between rounded-[1.5rem] border border-dashed border-[#d7cebf] bg-[#faf8f4] p-5 text-left text-sm text-[#807d74]"
-                >
-                  <span>{uploadedFileName || "Haz clic para cargar una imagen de referencia"}</span>
-                  <span className="rounded-full border border-[#d6cebf] px-3 py-1 text-xs text-[#5f655f]">Subir imagen</span>
-                </button>
+                <div className="mt-4 rounded-[1.5rem] border border-dashed border-[#d7cebf] bg-[#faf8f4] p-5 text-sm text-[#807d74]">
+                  Espacio para cargar imagen de referencia
+                </div>
 
                 <div className="mt-5 rounded-[1.7rem] bg-[#f5f1ea] p-5">
                   <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Precio estimado</div>
@@ -749,12 +582,12 @@ export default function GaiaWebV1() {
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-4">
-                  <button className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">
-                    Solicitar cotización
-                  </button>
+                  <button className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">Solicitar cotización</button>
                   <a
                     href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                     className="rounded-full border border-[#52665d] px-6 py-3 text-sm font-medium text-[#52665d]"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     Continuar por WhatsApp
                   </a>
@@ -784,10 +617,7 @@ export default function GaiaWebV1() {
                   <a href="#contacto" className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">
                     Cotizar evento
                   </a>
-                  <a
-                    href="#personaliza"
-                    className="rounded-full border border-[#52665d] px-6 py-3 text-sm font-medium text-[#52665d]"
-                  >
+                  <a href="#personaliza" className="rounded-full border border-[#52665d] px-6 py-3 text-sm font-medium text-[#52665d]">
                     Personalizar detalle
                   </a>
                 </div>
@@ -803,15 +633,9 @@ export default function GaiaWebV1() {
                   <div className="rounded-[1.4rem] bg-white p-5">
                     <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Tiempos de producción</div>
                     <div className="mt-3 space-y-3 text-sm leading-7 text-[#6d6b63]">
-                      <p>
-                        <span className="font-medium text-[#4f625a]">Estándar:</span> 2 a 4 días hábiles
-                      </p>
-                      <p>
-                        <span className="font-medium text-[#4f625a]">Personalizados:</span> 4 a 7 días hábiles
-                      </p>
-                      <p>
-                        <span className="font-medium text-[#4f625a]">Eventos:</span> según cantidad y complejidad
-                      </p>
+                      <p><span className="font-medium text-[#4f625a]">Estándar:</span> 2 a 4 días hábiles</p>
+                      <p><span className="font-medium text-[#4f625a]">Personalizados:</span> 4 a 7 días hábiles</p>
+                      <p><span className="font-medium text-[#4f625a]">Eventos:</span> según cantidad y complejidad</p>
                     </div>
                   </div>
                 </div>
@@ -844,14 +668,11 @@ export default function GaiaWebV1() {
                 <div className="relative flex min-h-[430px] items-center justify-center overflow-hidden rounded-[1.75rem] border border-[#e2dbcf] bg-[#faf8f4]">
                   <div className="absolute h-72 w-72 rounded-full border border-[#e8e0d4]" />
                   <div className="absolute h-56 w-56 rounded-full border border-[#efe8dc]" />
-                  <div className="absolute top-16 text-[11px] uppercase tracking-[0.34em] text-[#8f8a80]">
-                    Origen · Tierra · Belleza natural
-                  </div>
+                  <div className="absolute top-16 text-[11px] uppercase tracking-[0.34em] text-[#8f8a80]">Origen · Tierra · Belleza natural</div>
                   <div className="text-center">
                     <div className="font-serif text-7xl tracking-[0.24em] text-[#62756d] md:text-8xl">GAIA</div>
                     <p className="mx-auto mt-5 max-w-sm text-sm leading-7 text-[#6e6d66]">
-                      Cada vela nace como una pieza especial, diseñada para conectar con regalos, recuerdos, celebraciones
-                      y momentos únicos.
+                      Cada vela nace como una pieza especial, diseñada para conectar con regalos, recuerdos, celebraciones y momentos únicos.
                     </p>
                   </div>
                 </div>
@@ -865,22 +686,20 @@ export default function GaiaWebV1() {
                 />
 
                 <p className="mt-5 text-sm leading-8 text-[#676860] md:text-base">
-                  Cada pieza está pensada para transformar espacios, envolver emociones y convertir momentos simples en
-                  recuerdos especiales. Inspirada en la esencia de la tierra, GAIA crea velas que abrazan, decoran y
-                  cuentan historias.
+                  Cada pieza está pensada para transformar espacios, envolver emociones y convertir momentos simples en recuerdos especiales. Inspirada en la esencia de la tierra, GAIA crea velas que abrazan, decoran y cuentan historias.
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {["Personalización con sentido", "Estética delicada", "Inspiración natural", "Conexión emocional"].map(
-                    (item) => (
-                      <div
-                        key={item}
-                        className="rounded-[1.35rem] border border-[#e4dccf] bg-[#faf8f4] px-5 py-4 text-sm text-[#56645e]"
-                      >
-                        {item}
-                      </div>
-                    )
-                  )}
+                  {[
+                    "Personalización con sentido",
+                    "Estética delicada",
+                    "Inspiración natural",
+                    "Conexión emocional",
+                  ].map((item) => (
+                    <div key={item} className="rounded-[1.35rem] border border-[#e4dccf] bg-[#faf8f4] px-5 py-4 text-sm text-[#56645e]">
+                      {item}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -920,51 +739,28 @@ export default function GaiaWebV1() {
                   light
                 />
                 <div className="mt-8 space-y-3 text-sm text-white/80">
-                  <p>
-                    <span className="font-medium text-white">Ciudad base:</span> Rionegro, Antioquia
-                  </p>
-                  <p>
-                    <span className="font-medium text-white">Canal principal:</span> WhatsApp
-                  </p>
-                  <p>
-                    <span className="font-medium text-white">Instagram:</span> velasgaia.26
-                  </p>
-                  <p>
-                    <span className="font-medium text-white">TikTok:</span> @velas.gaia
-                  </p>
+                  <p><span className="font-medium text-white">Ciudad base:</span> Rionegro, Antioquia</p>
+                  <p><span className="font-medium text-white">WhatsApp:</span> 302 127 7385</p>
+                  <p><span className="font-medium text-white">Instagram:</span> @{instagramHandle}</p>
+                  <p><span className="font-medium text-white">TikTok:</span> {tiktokHandle}</p>
                 </div>
               </div>
 
               <div className="rounded-[2rem] bg-white p-8 text-[#4f625a] shadow-[0_18px_60px_rgba(27,31,30,0.18)] lg:p-10">
                 <div className="grid gap-4 md:grid-cols-2">
-                  <input
-                    className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
-                    placeholder="Nombre"
-                  />
-                  <input
-                    className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
-                    placeholder="Celular"
-                  />
+                  <input className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]" placeholder="Nombre" />
+                  <input className="rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]" placeholder="Celular" />
                 </div>
-                <input
-                  className="mt-4 w-full rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
-                  placeholder="Correo"
-                />
-                <input
-                  className="mt-4 w-full rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
-                  placeholder="Motivo de contacto"
-                />
-                <textarea
-                  className="mt-4 min-h-[140px] w-full rounded-[1.5rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]"
-                  placeholder="Cuéntanos qué necesitas"
-                />
+                <input className="mt-4 w-full rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]" placeholder="Correo" />
+                <input className="mt-4 w-full rounded-[1.2rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]" placeholder="Motivo de contacto" />
+                <textarea className="mt-4 min-h-[140px] w-full rounded-[1.5rem] border border-[#ddd6cb] px-4 py-3 outline-none placeholder:text-[#9a958c]" placeholder="Cuéntanos qué necesitas" />
                 <div className="mt-6 flex flex-wrap gap-4">
-                  <button className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">
-                    Enviar mensaje
-                  </button>
+                  <button className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">Enviar mensaje</button>
                   <a
                     href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, quiero más información sobre GAIA.")}`}
                     className="rounded-full border border-[#52665d] px-6 py-3 text-sm font-medium text-[#52665d]"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     Ir a WhatsApp
                   </a>
@@ -986,18 +782,10 @@ export default function GaiaWebV1() {
             <div>
               <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Navegación</div>
               <div className="mt-4 space-y-3 text-sm text-[#5c625c]">
-                <a href="#inicio" className="block">
-                  Inicio
-                </a>
-                <a href="#catalogo" className="block">
-                  Catálogo
-                </a>
-                <a href="#personaliza" className="block">
-                  Personaliza tu vela
-                </a>
-                <a href="#eventos" className="block">
-                  Eventos
-                </a>
+                <a href="#inicio" className="block">Inicio</a>
+                <a href="#catalogo" className="block">Catálogo</a>
+                <a href="#personaliza" className="block">Personaliza tu vela</a>
+                <a href="#eventos" className="block">Eventos</a>
               </div>
             </div>
 
@@ -1005,9 +793,9 @@ export default function GaiaWebV1() {
               <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Contacto</div>
               <div className="mt-4 space-y-3 text-sm text-[#5c625c]">
                 <div>Rionegro, Antioquia</div>
-                <div>3021277385</div>
-                <div>velasgaia.26</div>
-                <div>@velas.gaia</div>
+                <a href={instagramUrl} target="_blank" rel="noreferrer" className="block">@{instagramHandle}</a>
+                <a href={tiktokUrl} target="_blank" rel="noreferrer" className="block">{tiktokHandle}</a>
+                <div>302 127 7385</div>
               </div>
             </div>
           </div>
@@ -1016,6 +804,8 @@ export default function GaiaWebV1() {
         <a
           href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, quiero cotizar una vela en GAIA.")}`}
           className="fixed bottom-5 right-5 rounded-full bg-[#52665d] px-5 py-3 text-sm font-medium text-white shadow-[0_18px_40px_rgba(53,61,57,0.28)] transition hover:opacity-90"
+          target="_blank"
+          rel="noreferrer"
         >
           WhatsApp
         </a>
@@ -1064,47 +854,17 @@ export default function GaiaWebV1() {
                         <div className="mt-3 text-sm text-[#5d615b]">{selectedProduct.time}</div>
                       </div>
                     </div>
-
-                    <div className="mt-6 rounded-[1.5rem] border border-[#e4dccf] bg-white p-5">
-                      <div className="flex flex-wrap items-end justify-between gap-4">
-                        <div>
-                          <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Cantidad</div>
-                          <input
-                            type="number"
-                            min={1}
-                            value={selectedProductQty}
-                            onChange={(e) => setSelectedProductQty(Number(e.target.value) || 1)}
-                            className="mt-3 w-28 rounded-full border border-[#ddd4c7] px-4 py-2 text-sm outline-none"
-                          />
-                        </div>
-                        <div className="text-right">
-                          <div className="text-[11px] uppercase tracking-[0.28em] text-[#8f8a80]">Total estándar</div>
-                          <div className="mt-2 font-serif text-3xl text-[#4f625a]">{formatCOP(selectedProductTotal)}</div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                        `Hola, quiero comprar ${selectedProductQty} unidad(es) del producto ${selectedProduct.name} de GAIA. Total base: ${formatCOP(selectedProductTotal)}.`
-                      )}`}
-                      className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white"
-                    >
-                      Pagar
-                    </a>
-                    <button
-                      onClick={() => handlePersonalizeProduct(selectedProduct)}
-                      className="rounded-full border border-[#52665d] px-6 py-3 text-sm font-medium text-[#52665d]"
-                    >
+                    <a href="#personaliza" onClick={() => setSelectedProduct(null)} className="rounded-full bg-[#52665d] px-6 py-3 text-sm font-medium text-white">
                       Personalizar esta vela
-                    </button>
+                    </a>
                     <a
-                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                        `Hola, quiero pedir por WhatsApp el producto ${selectedProduct.name} de GAIA.`
-                      )}`}
+                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hola, quiero cotizar el producto ${selectedProduct.name} de GAIA.`)}`}
                       className="rounded-full border border-[#52665d] px-6 py-3 text-sm font-medium text-[#52665d]"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       Pedir por WhatsApp
                     </a>
